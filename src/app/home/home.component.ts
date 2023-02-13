@@ -24,4 +24,13 @@ export class HomeComponent implements OnInit {
     //relativeTo defines relative to which route this link should be loaded . When not defined it is root domain by default
     this.router.navigate(['servers'], { relativeTo: this.route });
   }
+
+  //use query params and fragments on both programmatic routing approach
+  //for routerLink approach check servers.component.html file
+  onLoadServer(id: number) {
+    this.router.navigate(['servers', id, 'edit'], {
+      queryParams: { allowEdit: '1' },
+      fragment: 'loading',
+    });
+  }
 }
