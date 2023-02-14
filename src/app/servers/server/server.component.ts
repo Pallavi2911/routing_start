@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -13,7 +13,8 @@ export class ServerComponent implements OnInit {
 
   constructor(
     private serversService: ServersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -25,6 +26,16 @@ export class ServerComponent implements OnInit {
     //retrieve the param reactively
     this.route.params.subscribe((params: Params) => {
       this.server = this.serversService.getServer(+params['id']);
+    });
+  }
+
+  //video 141
+  //queryParamsHandling: 'merge' , to merge our old query params with any new we might add
+  //queryParamsHandling: 'preserve', to preserve the query params that are getting dropped by default
+  onEdit() {
+    this.router.navigate(['edit'], {
+      relativeTo: this.route,
+      queryParamsHandling: 'preserve',
     });
   }
 }
