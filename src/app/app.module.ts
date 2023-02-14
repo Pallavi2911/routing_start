@@ -12,11 +12,13 @@ import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 //import is Routes
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 //to define all the routes of our application
 //children indicate child routes
+//routes get parsed from top to bottom
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   {
     path: 'users',
     component: UsersComponent,
@@ -31,6 +33,10 @@ const appRoutes: Routes = [
       { path: ':id/edit', component: EditServerComponent },
     ],
   },
+  { path: 'not-found', component: PageNotFoundComponent },
+  //If you don't want to specify a component to load ,use redirectTo by specifying a path
+  // ** is a wildcard route, it should be last one always
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
@@ -42,6 +48,7 @@ const appRoutes: Routes = [
     UserComponent,
     EditServerComponent,
     ServerComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
