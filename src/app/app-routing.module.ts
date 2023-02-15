@@ -61,6 +61,8 @@ const appRoutes: Routes = [
     //to register routes in our app or in other words to add routing functionality to our app
     //forRoot allows us to register some routes for our main application
     RouterModule.forRoot(appRoutes),
+    //hashtag routes
+    //RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
   //exports help to add this module to the imports of another module
   exports: [RouterModule],
