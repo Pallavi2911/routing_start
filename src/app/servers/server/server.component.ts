@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -18,15 +18,18 @@ export class ServerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //retrieve the param
-    //id is is number here so we need to convert id string to number by adding +
-    const idConst = +this.route.snapshot.params['id'];
-    this.server = this.serversService.getServer(idConst);
-
-    //retrieve the param reactively
-    this.route.params.subscribe((params: Params) => {
-      this.server = this.serversService.getServer(+params['id']);
+    this.route.data.subscribe((data: Data) => {
+      this.server = data['serverInRouting'];
     });
+    // //retrieve the param
+    // //id is is number here so we need to convert id string to number by adding +
+    // const idConst = +this.route.snapshot.params['id'];
+    // this.server = this.serversService.getServer(idConst);
+
+    // //retrieve the param reactively
+    // this.route.params.subscribe((params: Params) => {
+    //   this.server = this.serversService.getServer(+params['id']);
+    // });
   }
 
   //video 141
